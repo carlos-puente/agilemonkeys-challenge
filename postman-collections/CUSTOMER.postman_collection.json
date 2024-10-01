@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "a530dd73-fb80-4df1-b216-fa9839442902",
+		"name": "CUSTOMER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38621261"
+	},
+	"item": [
+		{
+			"name": "PICTURE UPLOAD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "picture",
+							"type": "file",
+							"src": "/home/carlos/Descargas/avatar.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:2801/api/v1/customer/3/picture/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2801",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"3",
+						"picture",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PICTURE DOWNLOAD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2801/api/v1/customer/138/picture/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2801",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"138",
+						"picture",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET CUSTOMER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2801/api/v1/customer/128",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2801",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"128"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE CUSTOMER",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2801/api/v1/customer/128/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2801",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"128",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE CUSTOMER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n          \"firstName\": \"testFirstName\",\n          \"lastName\": \"testLastName\",\n          \"email\": \"email@test.com\",\n          \"phoneNumber\": \"625535541\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:2801/api/v1/customer/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2801",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE CUSTOMER",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":128,\n          \"firstName\": \"testFirstNameUPDATED\",\n          \"lastName\": \"testLastNameUPDATED\",\n          \"email\": \"email@test.comUPDATED\",\n          \"phoneNumber\": \"62553554wwww1\"\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:2801/api/v1/customer/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2801",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALL CUSTOMERS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_page\":\"1\",\n    \"_limit\":\"10\",\n    \"_sort\": \"lastName\",\n    \"_oder\": \"asc\",\n    \"q\": \"david\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:2801/api/v1/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2801",
+					"path": [
+						"api",
+						"v1",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{JWT}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "JWT",
+			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3Mjc1MDc4NzMsImV4cCI6MTcyNzUxMTQ3M30.nDYpPaUMQxaXFT9tgTVQ1ISYj3_QM5rIqEaBU6Lmvyc"
+		}
+	]
+}

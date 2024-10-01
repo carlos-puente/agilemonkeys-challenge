@@ -672,6 +672,14 @@ there are two disabled tests designed to generate customer and user database ins
 these tests to generate the sql insertas, and populate your database with sample data for testing
 purposes.
 
+#### Postman
+
+Additionally, the project includes a folder named "postman-collections" containing three Postman
+collections along with sample requests. The Customer and User collections each have a dedicated
+variable named JWT. After logging in, you will need to update this variable with the JWT token
+received to authorize the subsequent API requests
+
+
 
 
 
