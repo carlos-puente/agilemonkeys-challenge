@@ -10,6 +10,7 @@ import me.carlosjai.agilemonkeyschallenge.domain.exception.CustomResponseStatusE
 import me.carlosjai.agilemonkeyschallenge.domain.exception.ErrorCodeEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -147,6 +148,19 @@ public class GlobalExceptionHandler {
         .timestamp(LocalDateTime.now())
         .message(List.of(ErrorCodeEnum.JWT_NOT_VALID.getErrorMessage(), ex.getMessage()))
         .errorCode(ErrorCodeEnum.JWT_NOT_VALID.name())
+        .build();
+
+    return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+  }
+
+  @ExceptionHandler(AccessDeniedException.class)
+  public ResponseEntity<ErrorResponse> handleAccessDeniedException(
+      AccessDeniedException ex) {
+    ErrorResponse response = ErrorResponse.builder()
+        .status(HttpStatus.FORBIDDEN.getReasonPhrase())
+        .timestamp(LocalDateTime.now())
+        .message(List.of(ErrorCodeEnum.ACCESS_DENIED.getErrorMessage()))
+        .errorCode(ErrorCodeEnum.ACCESS_DENIED.name())
         .build();
 
     return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);

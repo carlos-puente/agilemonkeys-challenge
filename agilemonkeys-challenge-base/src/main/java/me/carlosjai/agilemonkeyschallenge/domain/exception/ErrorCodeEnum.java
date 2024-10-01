@@ -18,6 +18,8 @@ public enum ErrorCodeEnum {
   INVALID_ROLES("Invalid roles found: "),
   JWT_NOT_VALID("The JWT is not valid or is expired. Please login again."),
   OTHER("OTHER"),
+  ACCESS_DENIED(
+      "Access denied: You do not have the necessary permissions to view or interact with this resource."),
   VALIDATION("Error validating request");
 
   @Getter
