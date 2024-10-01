@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: agilemonkeys-challenge
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+  datasource:
+    initialization-mode: always
+    initialize: true
+    url: ${database-url}
+    username: ${database-username}
+    password: ${database-password}
+  liquibase:
+    enabled: true
+server:
+  port: 2801
+content:
+  extensions:
+    content-types:
+      - image/bmp
+      - image/gif
+      - image/jpeg
+      - image/tiff
+      - image/png
+    file-extensions:
+      - .bmp
+      - .jpeg
+      - .jpe
+      - .jpg
+      - .gif
+      - .png
+      - .tif
+      - .tiff
+security:
+  jwt:
+    secret-key: ${jwt-secret}
+    expiration-time: 3600000
+db.schema: store

@@ -1,0 +1,188 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_customer_table
+      author: CarlosPuente
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: sk
+                  type: BIGINT
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: phone_number
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: picture_name
+                  type: VARCHAR(255)
+              - column:
+                  name: picture_bytes
+                  type: bytea
+              - column:
+                  name: created_by
+                  type: VARCHAR(100)
+              - column:
+                  name: creation_date
+                  type: TIMESTAMP(6)
+              - column:
+                  name: last_modified_by
+                  type: VARCHAR(100)
+              - column:
+                  name: last_modified_date
+                  type: TIMESTAMP(6)
+        - createSequence:
+            sequenceName: customer_seq
+            cacheSize: 0
+            cycle: false
+            incrementBy: 1
+            minValue: 1
+            maxValue: 9999999999999999
+  - changeSet:
+      id: create_user_tables
+      author: CarlosPuente
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: sk
+                  type: BIGINT
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: VARCHAR(45)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: full_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: VARCHAR(100)
+              - column:
+                  name: creation_date
+                  type: TIMESTAMP(6)
+              - column:
+                  name: last_modified_by
+                  type: VARCHAR(100)
+              - column:
+                  name: last_modified_date
+                  type: TIMESTAMP(6)
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: sk
+                  type: BIGINT
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(45)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_sk
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_sk
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: user_sk
+            baseTableName: user_roles
+            constraintName: user_roles_usk_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: sk
+            referencedTableName: user
+        - addForeignKeyConstraint:
+            baseColumnNames: role_sk
+            baseTableName: user_roles
+            constraintName: user_roles_rsk_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: sk
+            referencedTableName: roles
+        - addUniqueConstraint:
+            tableName: user_roles
+            columnNames: user_sk, role_sk
+            constraintName: uq_user_role_combination
+        - createSequence:
+            sequenceName: user_seq
+            cacheSize: 0
+            cycle: false
+            incrementBy: 1
+            minValue: 1
+            maxValue: 9999999999999999
+        - createSequence:
+            sequenceName: roles_seq
+            cacheSize: 0
+            cycle: false
+            incrementBy: 1
+            minValue: 1
+            maxValue: 9999999999999999
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: sk
+                  valueComputed: "nextval('roles_seq')"
+              - column:
+                  name: name
+                  value: ROLE_ADMIN
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: sk
+                  valueComputed: "nextval('roles_seq')"
+              - column:
+                  name: name
+                  value: ROLE_USER
