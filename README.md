@@ -22,6 +22,7 @@ This project was built using the following:
 * IntelliJ IDEA (optional)
 * Docker (optional, but recommended)
 * GNU/Linux Ubuntu (optional, but recommended)
+* git
 
 Installation Guides
 
@@ -569,7 +570,12 @@ issues as they arise.
 
 #### IntelliJ Local Execution
 
-1. **Create the Store Schema in PostgreSQL**  
+1. ** Dowload repository **
+   ```bash
+   $ git clone https://github.com/carlos-puente/agilemonkeys-challenge.git
+      ```
+
+2. **Create the Store Schema in PostgreSQL**  
    Liquibase will handle the creation of application tables, but you need to manually create the
    schema before launching the application and triggering Liquibase. Please run the following SQL
    command:
